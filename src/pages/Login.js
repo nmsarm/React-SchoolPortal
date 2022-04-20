@@ -1,55 +1,83 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import '../styles/Login.scss';
 
+// For Modal
+import { Modal, Button } from "react-bootstrap";
+
 const Login = () => {
-    
-    return(
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
+    return (
         <>
-            <div className="container">
-                <div class="tab-content">
-                <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                    <form>
-                    {/*  Email input */}
-                    <div class="form-outline mb-4">
-                        <input type="email" id="loginName" class="form-control" />
-                        <label class="form-label" for="loginName">Email or username</label>
-                    </div>
+            <section className="h-100 bg-dark">
+                <div className="container py-5 h-100">
+                    <div className="row d-flex justify-content-center align-items-center h-100">
+                        <div className="col">
+                            <div className="card card-registration my-4">
+                                <div className="row g-0">
+                                    <div className="col-xl-6 d-none d-xl-block">
+                                        <img
+                                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                                            alt="Sample photo"
+                                            className="img-fluid"
+                                            style={{ borderTopLeftRadius: ".25rem", borderBottomLeftRadius: ".25rem" }}
+                                        />
+                                    </div>
+                                    <div className="col-xl-6">
+                                        <div className="card-body p-md-5 text-black">
+                                            <h3 className="mb-5 text-uppercase">Login</h3>
+                                            <form>
+                                                <div className="row">
+                                                    <div className="mb-4">
+                                                        <div className="form-outline">
+                                                            <input type="text" id="form3Example1m" className="form-control form-control-lg" />
+                                                            <label className="form-label" for="form3Example1m">Student ID Number</label>
+                                                        </div>
+                                                    </div>
 
-                    {/*  Password input */}
-                    <div class="form-outline mb-4">
-                        <input type="password" id="loginPassword" class="form-control" />
-                        <label class="form-label" for="loginPassword">Password</label>
-                    </div>
+                                                    <div className="form-outline mb-4">
+                                                        <input type="password" id="form3Example90" className="form-control form-control-lg" />
+                                                        <label className="form-label" for="form3Example90">Password</label>
+                                                    </div>
+                                                    <div className="d-flex justify-content-center py-3">
 
-                {/*   2 column grid layout */}
-                    <div class="row mb-4">
-                        <div class="col-md-6 d-flex justify-content-center">
-                    {/*    <!-- Checkbox  */}
-                        <div class="form-check mb-3 mb-md-0">
-                            <input class="form-check-input" type="checkbox" value="" id="loginCheck"  />
-                            <label class="form-check-label" for="loginCheck"> Remember me </label>
+                                                        <button type="button" className="btn btn-secondary btn-lg">
+                                                            Cancel
+                                                        </button>
+
+                                                        <button type="button" className="btn btn-warning btn-lg ms-2" onClick={handleShow}>Login</button>
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <p>Not a member? <Link to="/registration-form" aria-current="page">Register</Link></p>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        </div>
-
-                        <div class="col-md-6 d-flex justify-content-center">
-                        {/*  Simple link  */}
-                        <a href="#!">Forgot password?</a>
-                        </div>
                     </div>
-
-                {/*       Submit button  */}
-                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
-
-                    {/*   Register buttons  */}
-                    <div class="text-center">
-                        <p>Not a member? <Link to ="/registration-form" aria-current="page">Register</Link></p>
-                    </div>
-                    </form>
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Login Success</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Welcome to the Student Portal! </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="primary" onClick={handleClose}>
+                                Okay
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
-                </div>
-                </div>
+            </section>
         </>
     );
 }
