@@ -7,12 +7,24 @@ import '../styles/Login.scss';
 import { Modal, Button } from "react-bootstrap";
 
 const Login = () => {
-
+    const [id, setId] = useState("");
+    const [password, setPassword] = useState("");
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const clearFields = () => {
+        // clearing the values
+        setId("");
+        setPassword("");
+
+    }
+
+    const handleSubmit = () => {
+        clearFields()
+        handleClose()
+    }
 
     return (
         <>
@@ -37,22 +49,38 @@ const Login = () => {
                                                 <div className="row">
                                                     <div className="mb-4">
                                                         <div className="form-outline">
-                                                            <input type="text" id="form3Example1m" className="form-control form-control-lg" />
-                                                            <label className="form-label" for="form3Example1m">Student ID Number</label>
+                                                            <input
+                                                                type="text"
+                                                                id="form3Example1m"
+                                                                className="form-control form-control-lg"
+                                                                value={id}
+                                                                onChange={(e) => setId(e.target.value)}                                               
+                                                            />
+                                                            <label className="form-label" for="form3Example1m" >
+                                                                Student ID
+                                                            </label>
                                                         </div>
                                                     </div>
 
                                                     <div className="form-outline mb-4">
-                                                        <input type="password" id="form3Example90" className="form-control form-control-lg" />
-                                                        <label className="form-label" for="form3Example90">Password</label>
+                                                        <input
+                                                            type="password"
+                                                            id="form3Example90"
+                                                            className="form-control form-control-lg" 
+                                                            value={password}
+                                                            onChange={(e) => setPassword(e.target.value)}
+                                                        />
+                                                        <label className="form-label" for="form3Example90">
+                                                            Password
+                                                        </label>
                                                     </div>
                                                     <div className="d-flex justify-content-center py-3">
 
-                                                        <button type="button" className="btn btn-secondary btn-lg">
+                                                        <button type="button" className="btn btn-secondary btn-lg" onClick={clearFields}>
                                                             Cancel
                                                         </button>
 
-                                                        <button type="button" className="btn btn-warning btn-lg ms-2" onClick={handleShow}>Login</button>
+                                                        <button type="button" className="btn btn-warning btn-lg mx-2" onClick={handleShow}>Login</button>
                                                     </div>
                                                     <div className="text-center">
                                                         <p>Not a member? <Link to="/registration-form" aria-current="page">Register</Link></p>
@@ -71,7 +99,7 @@ const Login = () => {
                         </Modal.Header>
                         <Modal.Body>Welcome to the Student Portal! </Modal.Body>
                         <Modal.Footer>
-                            <Button variant="primary" onClick={handleClose}>
+                            <Button variant="primary" onClick={handleSubmit}>
                                 Okay
                             </Button>
                         </Modal.Footer>

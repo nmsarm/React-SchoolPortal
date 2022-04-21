@@ -7,10 +7,39 @@ import '../styles/Registration.scss';
 import { Modal, Button } from "react-bootstrap";
 
 const Registration = () => {
+    const [id, setId] = useState("");
+    const [lname, setLname] = useState("");
+    const [fname, setFname] = useState("");
+    const [mname, setMname] = useState("");
+    const [college, setCollege] = useState("");
+    const [program, setProgram] = useState(0);
+    const [year, setYear] = useState(" ");
+    const [password, setPassword] = useState("");
+    const [confPass, setConfPass] = useState("");
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const clearFields = () => {
+        // clearing the values
+        setId("");
+        setLname("");
+        setFname("");
+        setMname("");
+        setCollege("");
+        setProgram(0);
+        setYear("");
+        setPassword("");
+        setConfPass("");
+    }
+
+    const handleSubmit = () => {
+        clearFields()
+        handleClose()
+    }
+
 
     return (
         <>
@@ -35,13 +64,22 @@ const Registration = () => {
                                             <div className="row">
                                                 <div className="col-md-6 mb-4">
                                                     <div className="form-outline">
-                                                        <input type="text" id="form3Example1m" className="form-control form-control-lg" />
-                                                        <label className="form-label" for="form3Example1m">Student ID Number</label>
+                                                        <input
+                                                            type="text"
+                                                            id="form3Example1m"
+                                                            className="form-control form-control-lg"
+                                                            value={id}
+                                                            onChange={(e) => setId(e.target.value)}
+                                                        />
+                                                        <label className="form-label" for="form3Example1m">Student ID</label>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6 mb-4">
                                                     <div className="form-outline">
-                                                        <input type="text" id="form3Example1n" className="form-control form-control-lg" />
+                                                        <input type="text" id="form3Example1n" className="form-control form-control-lg"
+                                                            value={lname}
+                                                            onChange={(e) => setLname(e.target.value)}
+                                                        />
                                                         <label className="form-label" for="form3Example1n">Last name</label>
                                                     </div>
                                                 </div>
@@ -50,27 +88,38 @@ const Registration = () => {
                                             <div className="row">
                                                 <div className="col-md-6 mb-4">
                                                     <div className="form-outline">
-                                                        <input type="text" id="form3Example1m1" className="form-control form-control-lg" />
+                                                        <input type="text" id="form3Example1m1" className="form-control form-control-lg"
+                                                            value={fname}
+                                                            onChange={(e) => setFname(e.target.value)} />
                                                         <label className="form-label" for="form3Example1m1">Given Name</label>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6 mb-4">
                                                     <div className="form-outline">
-                                                        <input type="text" id="form3Example1n1" className="form-control form-control-lg" />
+                                                        <input type="text" id="form3Example1n1" className="form-control form-control-lg"
+                                                            value={mname}
+                                                            onChange={(e) => setMname(e.target.value)}
+                                                        />
                                                         <label className="form-label" for="form3Example1n1">Middle Name</label>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div className="form-outline mb-4">
-                                                <input type="text" id="form3Example8" className="form-control form-control-lg" />
+                                                <input type="text" id="form3Example8" className="form-control form-control-lg"
+                                                    value={college}
+                                                    onChange={(e) => setCollege(e.target.value)}
+                                                />
                                                 <label className="form-label" for="form3Example8">College</label>
                                             </div>
 
                                             <div className="row">
                                                 <div className="col-md-6 mb-4">
                                                     <label className="form-label" for="form3Example8">Program Enrolled</label>
-                                                    <select className="form-select form-select-sm" aria-label=".form-select-sm example">
+                                                    <select className="form-select form-select-sm" aria-label=".form-select-sm example"
+                                                        value={program}
+                                                        onChange={(e) => setProgram(e.target.value)}
+                                                    >
                                                         <option selected>Select Program</option>
                                                         <option value="1">Option 1</option>
                                                         <option value="2">Option 2</option>
@@ -80,29 +129,42 @@ const Registration = () => {
                                             </div>
 
                                             <div className="form-outline mb-4">
-                                                <input type="text" id="form3Example9" className="form-control form-control-lg" />
+                                                <input type="text" id="form3Example9" className="form-control form-control-lg"
+                                                    value={year}
+                                                    onChange={(e) => setYear(e.target.value)}
+                                                />
                                                 <label className="form-label" for="form3Example9">Year Level</label>
                                             </div>
 
                                             <div className="form-outline mb-4">
-                                                <input type="password" id="form3Example90" className="form-control form-control-lg" />
+                                                <input
+                                                    type="password"
+                                                    id="form3Example90"
+                                                    className="form-control form-control-lg"
+                                                    value={password}
+                                                    onChange={(e) => setPassword(e.target.value)}
+                                                />
                                                 <label className="form-label" for="form3Example90">Password</label>
                                             </div>
 
                                             <div className="form-outline mb-4">
-                                                <input type="password" id="form3Example99" className="form-control form-control-lg" />
+                                                <input type="password" id="form3Example99" className="form-control form-control-lg"
+                                                    value={confPass}
+                                                    onChange={(e) => setConfPass(e.target.value)}
+                                                />
                                                 <label className="form-label" for="form3Example99">Confirm Password</label>
                                             </div>
 
-                                            <div className="d-flex justify-content-center pt-3">
-                                                <Link to="/" aria-current="page">
-                                                    <button type="button" className="btn btn-secondary btn-lg">
-                                                        Cancel
-                                                    </button>
-                                                </Link>
+                                            <div className="d-flex justify-content-center py-3">
+                                                <button type="button" className="btn btn-secondary btn-lg" onClick={clearFields}>
+                                                    Cancel
+                                                </button>
+
                                                 <button type="button" className="btn btn-warning btn-lg ms-2" onClick={handleShow}>Submit</button>
                                             </div>
-
+                                            <div className="text-center">
+                                                <p>Already registered? <Link to="/login" aria-current="page">Login</Link></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -116,7 +178,7 @@ const Registration = () => {
                     </Modal.Header>
                     <Modal.Body>Your account has been created successfully. </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" onClick={handleClose}>
+                        <Button variant="primary" onClick={handleSubmit}>
                             Okay
                         </Button>
                     </Modal.Footer>
