@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Homepage from "./pages/Homepage";
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 // import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -11,7 +12,7 @@ function App() {
       <header className="App-header">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registration-form" element={<Registration />} />
         </Routes>
