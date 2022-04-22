@@ -81,10 +81,13 @@ const Login = () => {
                                                                 Cancel
                                                             </button>
 
-                                                            <button type="button" className="btn btn-warning btn-lg mx-2" onClick={handleShow} id="Login-btn">Login</button>
+                                                            <button type="button" className="btn btn-warning btn-lg mx-2" onClick={handleShow} id="Login-btn">
+                                                                Login
+                                                            </button>
                                                         </div>
                                                         <div className="text-center">
-                                                            <p>Not a member? <Link to="/registration-form" aria-current="page" id="Register-link">Register</Link></p>
+                                                            <p>Not a member? <Link to="/registration-form" aria-current="page" id="Register-link">Register</Link>
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </form>
