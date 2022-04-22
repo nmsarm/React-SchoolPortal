@@ -122,9 +122,10 @@ const Registration = () => {
                                                             onChange={(e) => setProgram(e.target.value)}
                                                         >
                                                             <option selected>Select Program</option>
-                                                            <option value="1">Option 1</option>
-                                                            <option value="2">Option 2</option>
-                                                            <option value="3">Option 3</option>
+                                                            <option value="1">Gryffindor</option>
+                                                            <option value="2">Slytherin</option>
+                                                            <option value="3">Ravenclaw</option>
+                                                            <option value="3">Hufflepuff</option>
                                                         </select>
                                                     </div>
                                                 </div>
