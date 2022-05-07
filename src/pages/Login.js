@@ -12,13 +12,15 @@ const Login = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = (e) => {
+        e.preventDefault();
+        setShow(true)
+    };
 
+    // clearing the values
     const clearFields = () => {
-        // clearing the values
         setId("");
         setPassword("");
-
     }
 
     const handleSubmit = () => {
@@ -34,28 +36,30 @@ const Login = () => {
                         <div className="row d-flex justify-content-center align-items-center h-100">
                             <div className="col">
                                 <div className="card card-registration my-4">
-                                    <div className="row g-0">
-                                        <div className="col-xl-6 d-none d-xl-block">
-                                            <img
-                                                src={Students} 
-                                                alt="Sample photo"
-                                                className="img-fluid"
-                                                style={{ borderTopLeftRadius: ".25rem", borderBottomLeftRadius: ".25rem" }}
-                                            />
-                                        </div>
-                                        <div className="col-xl-6">
-                                            <div className="card-body p-md-5 text-black">
-                                                <h3 className="mb-5" id="student-login">Student Login</h3>
-                                                <form>
+                                    <form onSubmit={handleShow}>
+                                        <div className="row g-0">
+                                            <div className="col-xl-6 d-none d-xl-block">
+                                                <img
+                                                    src={Students}
+                                                    alt="Sample photo"
+                                                    className="img-fluid"
+                                                    style={{ borderTopLeftRadius: ".25rem", borderBottomLeftRadius: ".25rem" }}
+                                                />
+                                            </div>
+                                            <div className="col-xl-6">
+                                                <div className="card-body p-md-5 text-black">
+                                                    <h3 className="mb-5" id="student-login">Student Login</h3>
                                                     <div className="row">
                                                         <div className="mb-4">
                                                             <div className="form-outline">
                                                                 <input
                                                                     type="text"
-                                                                    id="form3Example1m"
                                                                     className="form-control form-control-lg"
                                                                     value={id}
-                                                                    onChange={(e) => setId(e.target.value)}                                               
+                                                                    pattern="[0-9]{10}"
+                                                                    maxLength={10}
+                                                                    onChange={(e) => setId(e.target.value)}
+                                                                    required
                                                                 />
                                                                 <label className="form-label" htmlFor="form3Example1m" >
                                                                     Student ID
@@ -66,10 +70,10 @@ const Login = () => {
                                                         <div className="form-outline mb-4">
                                                             <input
                                                                 type="password"
-                                                                id="form3Example90"
-                                                                className="form-control form-control-lg" 
+                                                                className="form-control form-control-lg"
                                                                 value={password}
                                                                 onChange={(e) => setPassword(e.target.value)}
+                                                                required
                                                             />
                                                             <label className="form-label" htmlFor="form3Example90">
                                                                 Password
@@ -81,7 +85,7 @@ const Login = () => {
                                                                 Cancel
                                                             </button>
 
-                                                            <button type="button" className="btn btn-warning btn-lg mx-2" onClick={handleShow} id="Login-btn">
+                                                            <button type="submit" className="btn btn-warning btn-lg mx-2" id="Login-btn">
                                                                 Login
                                                             </button>
                                                         </div>
@@ -90,10 +94,10 @@ const Login = () => {
                                                             </p>
                                                         </div>
                                                     </div>
-                                                </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

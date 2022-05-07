@@ -42,10 +42,9 @@ const Registration = () => {
     }
 
     const validate = (e, message) => {
-        if(e._reactName === 'onInvalid') e.target.setCustomValidity(message)
+        if (e._reactName === 'onInvalid') e.target.setCustomValidity(message)
         else e.target.setCustomValidity(message)
     }
-
 
     // clearing the values
     const clearFields = () => {
@@ -73,8 +72,8 @@ const Registration = () => {
                     <div className="container py-5 h-100">
                         <div className="row d-flex justify-content-center align-items-center h-100">
                             <div className="col">
-                                    <div className="card card-registration my-4">
-                                        <form onSubmit={handleShow}>
+                                <div className="card card-registration my-4">
+                                    <form onSubmit={handleShow}>
                                         <div className="row g-0">
                                             <div className="col-xl-6 d-none d-xl-block">
                                                 <img
@@ -96,9 +95,9 @@ const Registration = () => {
                                                                     className="form-control form-control-lg"
                                                                     value={id}
                                                                     pattern="[0-9]{10}"
-                                                                    maxLength={10} 
+                                                                    maxLength={10}
                                                                     onChange={(e) => setId(e.target.value)}
-                                                                    onInvalid={e => validate(e, 'Student ID must be a 10 digit number')} 
+                                                                    onInvalid={e => validate(e, 'Student ID must be a 10 digit number')}
                                                                     onInput={e => validate(e, '')}
                                                                     required
                                                                     autoComplete="off"
@@ -218,8 +217,8 @@ const Registration = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        </form>
-                                    </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
