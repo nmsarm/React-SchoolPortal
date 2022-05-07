@@ -97,6 +97,7 @@ const Registration = () => {
                                                                     pattern="[0-9]{10}"
                                                                     maxLength={10}
                                                                     onChange={(e) => setId(e.target.value)}
+                                                                    title="Student ID must be a 10 digit number"
                                                                     onInvalid={e => validate(e, 'Student ID must be a 10 digit number')}
                                                                     onInput={e => validate(e, '')}
                                                                     required
