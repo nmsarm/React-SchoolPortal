@@ -41,15 +41,14 @@ const Registration = () => {
         setShow(true);
     }
 
-
     const validate = (e, message) => {
         if(e._reactName === 'onInvalid') e.target.setCustomValidity(message)
         else e.target.setCustomValidity(message)
     }
 
 
+    // clearing the values
     const clearFields = () => {
-        // clearing the values
         setId("");
         setLname("");
         setFname("");
@@ -68,13 +67,14 @@ const Registration = () => {
 
 
     return (
-        <form onSubmit={handleShow}>
-            <body className="registration-page">
+        <>
+            <main className="registration-page">
                 <section className="h-100">
                     <div className="container py-5 h-100">
                         <div className="row d-flex justify-content-center align-items-center h-100">
                             <div className="col">
                                     <div className="card card-registration my-4">
+                                        <form onSubmit={handleShow}>
                                         <div className="row g-0">
                                             <div className="col-xl-6 d-none d-xl-block">
                                                 <img
@@ -103,7 +103,7 @@ const Registration = () => {
                                                                     required
                                                                     autoComplete="off"
                                                                 />
-                                                                <label className="form-label" for="form3Example1m">Student ID</label>
+                                                                <label className="form-label" htmlFor="form3Example1m">Student ID</label>
                                                             </div>
                                                         </div>
                                                         <div className="col-md-6 mb-4">
@@ -114,7 +114,7 @@ const Registration = () => {
                                                                     required
                                                                     autoComplete="off"
                                                                 />
-                                                                <label className="form-label" for="form3Example1n">Last name</label>
+                                                                <label className="form-label" htmlFor="form3Example1n">Last name</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -128,7 +128,7 @@ const Registration = () => {
                                                                     required
                                                                     autoComplete="off"
                                                                 />
-                                                                <label className="form-label" for="form3Example1m1">Given Name</label>
+                                                                <label className="form-label" htmlFor="form3Example1m1">Given Name</label>
                                                             </div>
                                                         </div>
                                                         <div className="col-md-6 mb-4">
@@ -139,7 +139,7 @@ const Registration = () => {
                                                                     required
                                                                     autoComplete="off"
                                                                 />
-                                                                <label className="form-label" for="form3Example1n1">Middle Name</label>
+                                                                <label className="form-label" htmlFor="form3Example1n1">Middle Name</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -151,12 +151,12 @@ const Registration = () => {
                                                             required
                                                             autoComplete="off"
                                                         />
-                                                        <label className="form-label" for="form3Example8">College</label>
+                                                        <label className="form-label" htmlFor="form3Example8">College</label>
                                                     </div>
 
                                                     <div className="row">
                                                         <div className="col-md-6 mb-4">
-                                                            <label className="form-label" for="form3Example8">Program Enrolled</label>
+                                                            <label className="form-label" htmlFor="form3Example8">Program Enrolled</label>
                                                             <select className="form-select form-select-sm" aria-label=".form-select-sm example"
                                                                 value={program}
                                                                 onChange={(e) => setProgram(e.target.value)}
@@ -179,7 +179,7 @@ const Registration = () => {
                                                             required
                                                             autoComplete="off"
                                                         />
-                                                        <label className="form-label" for="form3Example9">Year Level</label>
+                                                        <label className="form-label" htmlFor="form3Example9">Year Level</label>
                                                     </div>
 
                                                     <div className="form-outline mb-4">
@@ -192,7 +192,7 @@ const Registration = () => {
                                                             required
                                                             autoComplete="off"
                                                         />
-                                                        <label className="form-label" for="form3Example90">Password</label>
+                                                        <label className="form-label" htmlFor="form3Example90">Password</label>
                                                     </div>
 
                                                     <div className="form-outline mb-4">
@@ -202,7 +202,7 @@ const Registration = () => {
                                                             required
                                                             autoComplete="off"
                                                         />
-                                                        <label className="form-label" for="form3Example99">Confirm Password</label>
+                                                        <label className="form-label" htmlFor="form3Example99">Confirm Password</label>
                                                     </div>
 
                                                     <div className="d-flex justify-content-center py-3">
@@ -218,6 +218,7 @@ const Registration = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                        </form>
                                     </div>
                             </div>
                         </div>
@@ -234,8 +235,8 @@ const Registration = () => {
                         </Modal.Footer>
                     </Modal>
                 </section>
-            </body>
-        </form>
+            </main>
+        </>
     );
 }
 

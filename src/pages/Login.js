@@ -28,7 +28,7 @@ const Login = () => {
 
     return (
         <>
-            <body className="login-page">
+            <main className="login-page">
                 <section className="h-100">
                     <div className="container py-5 h-100">
                         <div className="row d-flex justify-content-center align-items-center h-100">
@@ -57,7 +57,7 @@ const Login = () => {
                                                                     value={id}
                                                                     onChange={(e) => setId(e.target.value)}                                               
                                                                 />
-                                                                <label className="form-label" for="form3Example1m" >
+                                                                <label className="form-label" htmlFor="form3Example1m" >
                                                                     Student ID
                                                                 </label>
                                                             </div>
@@ -71,7 +71,7 @@ const Login = () => {
                                                                 value={password}
                                                                 onChange={(e) => setPassword(e.target.value)}
                                                             />
-                                                            <label className="form-label" for="form3Example90">
+                                                            <label className="form-label" htmlFor="form3Example90">
                                                                 Password
                                                             </label>
                                                         </div>
@@ -110,7 +110,7 @@ const Login = () => {
                         </Modal>
                     </div>
                 </section>
-            </body>
+            </main>
         </>
     );
 }
