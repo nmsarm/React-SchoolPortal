@@ -17,14 +17,32 @@ const Registration = () => {
     const [password, setPassword] = useState("");
     const [confPass, setConfPass] = useState("");
 
-    //modal
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    //Success Modal
+    const [showSuccess, setShowSuccess] = useState(false);
+
+    //Error Modal
+    const [showError, setShowError] = useState(false);
+
+    const handleClose = () => {
+        setShowSuccess(false);
+        setShowError(false);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('You clicked submit.')
 
+        if (password === confPass) {
+            console.log("Password and Confirm Password match!")
+            setShowSuccess(true);
+        }else {
+            console.log("Password and Confirm Password does not match!")
+            setShowError(true);
+            setPassword("");
+            setConfPass("");
+        }
+
+        /* For Console */
+        console.log('You clicked submit.')
         const input = {
             id: id,
             lname: lname,
@@ -36,9 +54,7 @@ const Registration = () => {
             password: password,
             confPass: confPass,
         }
-
         console.log(input);
-        setShow(true);
     }
 
     const validate = (e, message) => {
@@ -232,7 +248,8 @@ const Registration = () => {
                             </div>
                         </div>
                     </div>
-                    <Modal show={show} onHide={handleClose}>
+                    {/* Registration Success Modal */}
+                    <Modal show={showSuccess} onHide={handleClose}>
                         <Modal.Header closeButton>
                             <Modal.Title className="reg-success">Registration Success</Modal.Title>
                         </Modal.Header>
@@ -240,6 +257,18 @@ const Registration = () => {
                         <Modal.Footer>
                             <Button variant="primary" onClick={handleOkay}>
                                 Okay
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                    {/* Error Modal for Password not Match */}
+                    <Modal show={showError} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title className="reg-success">Message</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Password and Confirm Password does not match.</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="primary" onClick={handleClose}>
+                                Change
                             </Button>
                         </Modal.Footer>
                     </Modal>
