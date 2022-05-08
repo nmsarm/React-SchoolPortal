@@ -12,7 +12,7 @@ const Login = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setShow(true)
     };
@@ -23,7 +23,7 @@ const Login = () => {
         setPassword("");
     }
 
-    const handleSubmit = () => {
+    const handleOkay = () => {
         clearFields()
         handleClose()
     }
@@ -36,7 +36,7 @@ const Login = () => {
                         <div className="row d-flex justify-content-center align-items-center h-100">
                             <div className="col">
                                 <div className="card card-registration my-4">
-                                    <form onSubmit={handleShow}>
+                                    <form onSubmit={handleSubmit}>
                                         <div className="row g-0">
                                             <div className="col-xl-6 d-none d-xl-block">
                                                 <img
@@ -107,7 +107,7 @@ const Login = () => {
                             </Modal.Header>
                             <Modal.Body>Welcome to Platform 9 3/4!</Modal.Body>
                             <Modal.Footer>
-                                <Button variant="primary" onClick={handleSubmit}>
+                                <Button variant="primary" onClick={handleOkay}>
                                     Okay
                                 </Button>
                             </Modal.Footer>

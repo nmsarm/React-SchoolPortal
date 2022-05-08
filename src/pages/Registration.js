@@ -21,7 +21,7 @@ const Registration = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
 
-    const handleShow = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         console.log('You clicked submit.')
 
@@ -59,7 +59,7 @@ const Registration = () => {
         setConfPass("");
     }
 
-    const handleSubmit = () => {
+    const handleOkay = () => {
         clearFields()
         handleClose()
     }
@@ -73,7 +73,7 @@ const Registration = () => {
                         <div className="row d-flex justify-content-center align-items-center h-100">
                             <div className="col">
                                 <div className="card card-registration my-4">
-                                    <form onSubmit={handleShow}>
+                                    <form onSubmit={handleSubmit}>
                                         <div className="row g-0">
                                             <div className="col-xl-6 d-none d-xl-block">
                                                 <img
@@ -91,7 +91,6 @@ const Registration = () => {
                                                             <div className="form-outline">
                                                                 <input
                                                                     type="text"
-                                                                    id="form3Example1m"
                                                                     className="form-control form-control-lg"
                                                                     value={id}
                                                                     pattern="[0-9]{10}"
@@ -108,7 +107,8 @@ const Registration = () => {
                                                         </div>
                                                         <div className="col-md-6 mb-4">
                                                             <div className="form-outline">
-                                                                <input type="text" id="form3Example1n" className="form-control form-control-lg"
+                                                                <input type="text"  
+                                                                    className="form-control form-control-lg"
                                                                     value={lname}
                                                                     onChange={(e) => setLname(e.target.value)}
                                                                     required
@@ -122,7 +122,8 @@ const Registration = () => {
                                                     <div className="row">
                                                         <div className="col-md-6 mb-4">
                                                             <div className="form-outline">
-                                                                <input type="text" id="form3Example1m1" className="form-control form-control-lg"
+                                                                <input type="text" 
+                                                                    className="form-control form-control-lg"
                                                                     value={fname}
                                                                     onChange={(e) => setFname(e.target.value)}
                                                                     required
@@ -133,7 +134,8 @@ const Registration = () => {
                                                         </div>
                                                         <div className="col-md-6 mb-4">
                                                             <div className="form-outline">
-                                                                <input type="text" id="form3Example1n1" className="form-control form-control-lg"
+                                                                <input type="text" 
+                                                                    className="form-control form-control-lg"
                                                                     value={mname}
                                                                     onChange={(e) => setMname(e.target.value)}
                                                                     required
@@ -145,7 +147,8 @@ const Registration = () => {
                                                     </div>
 
                                                     <div className="form-outline mb-4">
-                                                        <input type="text" id="form3Example8" className="form-control form-control-lg"
+                                                        <input type="text" 
+                                                            className="form-control form-control-lg"
                                                             value={college}
                                                             onChange={(e) => setCollege(e.target.value)}
                                                             required
@@ -173,7 +176,8 @@ const Registration = () => {
                                                     </div>
 
                                                     <div className="form-outline mb-4">
-                                                        <input type="text" id="form3Example9" className="form-control form-control-lg"
+                                                        <input type="text" 
+                                                            className="form-control form-control-lg"
                                                             value={year}
                                                             onChange={(e) => setYear(e.target.value)}
                                                             required
@@ -185,10 +189,14 @@ const Registration = () => {
                                                     <div className="form-outline mb-4">
                                                         <input
                                                             type="password"
-                                                            id="form3Example90"
                                                             className="form-control form-control-lg"
                                                             value={password}
+                                                            pattern="^(?=.{8,}$)(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$"
+                                                            minLength={8} 
                                                             onChange={(e) => setPassword(e.target.value)}
+                                                            title="Password must be at least 8 characters with at least 1 special character, 1 uppercase letter, and 1 number"
+                                                            onInvalid={e => validate(e, 'Password must be at least 8 characters  with at least 1 special character, 1 uppercase letter, and 1 number')} 
+                                                            onInput={e => validate(e, '')}
                                                             required
                                                             autoComplete="off"
                                                         />
@@ -196,7 +204,8 @@ const Registration = () => {
                                                     </div>
 
                                                     <div className="form-outline mb-4">
-                                                        <input type="password" id="form3Example99" className="form-control form-control-lg"
+                                                        <input type="password" 
+                                                            className="form-control form-control-lg"
                                                             value={confPass}
                                                             onChange={(e) => setConfPass(e.target.value)}
                                                             required
@@ -229,7 +238,7 @@ const Registration = () => {
                         </Modal.Header>
                         <Modal.Body>Your account has been created successfully. </Modal.Body>
                         <Modal.Footer>
-                            <Button variant="primary" onClick={handleSubmit}>
+                            <Button variant="primary" onClick={handleOkay}>
                                 Okay
                             </Button>
                         </Modal.Footer>
