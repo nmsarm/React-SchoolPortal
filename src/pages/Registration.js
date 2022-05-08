@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Students2 from './styles/pics/students1.jpg';
-import './styles/Registration.scss';
+import Students2 from '../styles/pics/students1.jpg';
+import '../styles/Registration.scss';
 
 // For Modal
 import { Modal, Button } from "react-bootstrap";
@@ -34,7 +34,7 @@ const Registration = () => {
         if (password === confPass) {
             console.log("Password and Confirm Password match!")
             setShowSuccess(true);
-        }else {
+        } else {
             console.log("Password and Confirm Password does not match!")
             setShowError(true);
             setPassword("");
@@ -123,7 +123,7 @@ const Registration = () => {
                                                         </div>
                                                         <div className="col-md-6 mb-4">
                                                             <div className="form-outline">
-                                                                <input type="text"  
+                                                                <input type="text"
                                                                     className="form-control form-control-lg"
                                                                     value={lname}
                                                                     onChange={(e) => setLname(e.target.value)}
@@ -138,7 +138,7 @@ const Registration = () => {
                                                     <div className="row">
                                                         <div className="col-md-6 mb-4">
                                                             <div className="form-outline">
-                                                                <input type="text" 
+                                                                <input type="text"
                                                                     className="form-control form-control-lg"
                                                                     value={fname}
                                                                     onChange={(e) => setFname(e.target.value)}
@@ -150,7 +150,7 @@ const Registration = () => {
                                                         </div>
                                                         <div className="col-md-6 mb-4">
                                                             <div className="form-outline">
-                                                                <input type="text" 
+                                                                <input type="text"
                                                                     className="form-control form-control-lg"
                                                                     value={mname}
                                                                     onChange={(e) => setMname(e.target.value)}
@@ -163,7 +163,7 @@ const Registration = () => {
                                                     </div>
 
                                                     <div className="form-outline mb-4">
-                                                        <input type="text" 
+                                                        <input type="text"
                                                             className="form-control form-control-lg"
                                                             value={college}
                                                             onChange={(e) => setCollege(e.target.value)}
@@ -189,17 +189,23 @@ const Registration = () => {
                                                                 <option value="3">Hufflepuff</option>
                                                             </select>
                                                         </div>
-                                                    </div>
 
-                                                    <div className="form-outline mb-4">
-                                                        <input type="text" 
-                                                            className="form-control form-control-lg"
-                                                            value={year}
-                                                            onChange={(e) => setYear(e.target.value)}
-                                                            required
-                                                            autoComplete="off"
-                                                        />
-                                                        <label className="form-label" htmlFor="form3Example9">Year Level</label>
+                                                        <div className="col-md-6 mb-4">
+                                                            <label className="form-label" htmlFor="form3Example8">Year Level</label>
+                                                            <select className="form-select form-select-sm" aria-label=".form-select-sm example"
+                                                                value={year}
+                                                                onChange={(e) => setYear(e.target.value)}
+                                                                required
+                                                                autoComplete="off"
+                                                            >
+                                                                <option value="">Select Year</option>
+                                                                <option value="1">First Year</option>
+                                                                <option value="2">Second Year</option>
+                                                                <option value="3">Third Year</option>
+                                                                <option value="4">Fourth Year</option>
+                                                                <option value="5">Fifth Year</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
 
                                                     <div className="form-outline mb-4">
@@ -208,10 +214,10 @@ const Registration = () => {
                                                             className="form-control form-control-lg"
                                                             value={password}
                                                             pattern="^(?=.{8,}$)(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$"
-                                                            minLength={8} 
+                                                            minLength={8}
                                                             onChange={(e) => setPassword(e.target.value)}
                                                             title="Password must be at least 8 characters with at least 1 special character, 1 uppercase letter, and 1 number"
-                                                            onInvalid={e => validate(e, 'Password must be at least 8 characters  with at least 1 special character, 1 uppercase letter, and 1 number')} 
+                                                            onInvalid={e => validate(e, 'Password must be at least 8 characters  with at least 1 special character, 1 uppercase letter, and 1 number')}
                                                             onInput={e => validate(e, '')}
                                                             required
                                                             autoComplete="off"
@@ -220,7 +226,7 @@ const Registration = () => {
                                                     </div>
 
                                                     <div className="form-outline mb-4">
-                                                        <input type="password" 
+                                                        <input type="password"
                                                             className="form-control form-control-lg"
                                                             value={confPass}
                                                             onChange={(e) => setConfPass(e.target.value)}
@@ -248,16 +254,18 @@ const Registration = () => {
                             </div>
                         </div>
                     </div>
-                    {/* Registration Success Modal */}
+                    {/* Registration Success Modal - Will go back to Home Page after Registration*/}
                     <Modal show={showSuccess} onHide={handleClose}>
                         <Modal.Header closeButton>
                             <Modal.Title className="reg-success">Registration Success</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>Your account has been created successfully. </Modal.Body>
                         <Modal.Footer>
-                            <Button variant="primary" onClick={handleOkay}>
-                                Okay
-                            </Button>
+                            <Link to="/" aria-current="page" id="Register-link">
+                                <Button variant="primary">
+                                    Okay
+                                </Button>
+                            </Link>
                         </Modal.Footer>
                     </Modal>
                     {/* Error Modal for Password not Match */}

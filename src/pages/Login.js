@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Students from './styles/pics/students2.jpg';
-import './styles/Login.scss';
+import Students from '../styles/pics/students2.jpg';
+import '../styles/Login.scss';
 
 // For Modal
 import { Modal, Button } from "react-bootstrap";
