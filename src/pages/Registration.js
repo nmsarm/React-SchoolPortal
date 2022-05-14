@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Students2 from '../styles/pics/students1.jpg';
 import '../styles/Registration.scss';
+/* import useLocalStorage from './useLocalStorage'; */
 
 // For Modal
 import { Modal, Button } from "react-bootstrap";
@@ -80,6 +81,7 @@ const Registration = () => {
         handleClose()
     }
 
+    /* let [studId, setValue] = useLocalStorage('studentID', ''); */
 
     return (
         <>
@@ -109,9 +111,11 @@ const Registration = () => {
                                                                     type="text"
                                                                     className="form-control form-control-lg"
                                                                     value={id}
+                                                                    /* value={studID} */
                                                                     pattern="[0-9]{10}"
                                                                     maxLength={10}
                                                                     onChange={(e) => setId(e.target.value)}
+                                                                    /* onChange={(e) => setValue(e.target.value)} */
                                                                     title="Student ID must be a 10 digit number"
                                                                     onInvalid={e => validate(e, 'Student ID must be a 10 digit number')}
                                                                     onInput={e => validate(e, '')}
