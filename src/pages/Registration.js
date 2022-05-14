@@ -6,6 +6,10 @@ import '../styles/Registration.scss';
 // For Modal
 import { Modal, Button } from "react-bootstrap";
 
+// Animate on Scroll
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+
 const Registration = () => {
     //User Details
     const [user, setUser] = useState({
@@ -106,12 +110,15 @@ const Registration = () => {
         setShowUserExist(false);
     };
 
+    useEffect(() => {
+        Aos.init({ duration: 500 });
+    }, []);
 
     return (
         <>
             <main className="registration-page">
                 <section className="h-100">
-                    <div className="container py-5 h-100">
+                    <div className="container py-5 h-100" data-aos="fade-down">
                         <div className="row d-flex justify-content-center align-items-center h-100">
                             <div className="col">
                                 <div className="card card-registration my-4">

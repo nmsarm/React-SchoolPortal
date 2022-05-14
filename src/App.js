@@ -6,7 +6,7 @@ import Registration from './pages/Registration';
 
 function App() {
 
-  //set initial db data
+  //Set initial db data
   useEffect(() => {
     localStorage.setItem('userDB', JSON.stringify([{
       id: "",

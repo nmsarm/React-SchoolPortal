@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Students from '../styles/pics/students2.jpg';
 import '../styles/Login.scss';
 
 // For Modal
 import { Modal, Button } from "react-bootstrap";
+
+// Animate on Scroll
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+
 
 const Login = () => {
     const [id, setId] = useState("")
@@ -59,11 +64,15 @@ const Login = () => {
         setShowInvPass(false);
     };
 
+    useEffect(() => {
+        Aos.init({ duration: 500 });
+    }, []);
+
     return (
         <>
             <main className="login-page">
                 <section className="h-100">
-                    <div className="container py-5 h-100">
+                    <div className="container py-5 h-100" data-aos="fade-down">
                         <div className="row d-flex justify-content-center align-items-center h-100">
                             <div className="col">
                                 <div className="card card-registration my-4">
