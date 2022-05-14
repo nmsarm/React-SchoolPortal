@@ -6,60 +6,66 @@ import '../styles/Registration.scss';
 // For Modal
 import { Modal, Button } from "react-bootstrap";
 
-//GET ID FROM LOCAL STORAGE
 const Registration = () => {
-    const [id, setId] = useState("", [], () => {
-        const localData = localStorage.getItem('id');
-        return localData ? JSON.parse(localData) : [];
-    });
-    const [lname, setLname] = useState("");
-    const [fname, setFname] = useState("");
-    const [mname, setMname] = useState("");
-    const [college, setCollege] = useState("");
-    const [program, setProgram] = useState(0);
-    const [year, setYear] = useState(" ");
-    //GET PASSWORD FROM LOCAL STORAGE
-    const [password, setPassword] = useState("", [], () => {
-        const localData = localStorage.getItem('password');
-        return localData ? JSON.parse(localData) : [];
-    });
+    //User Details
+    const [user, setUser] = useState({
+        id: "",
+        lname: "",
+        fname: "",
+        mname: "",
+        college: "",
+        program: "",
+        year: "",
+        password: ""
+    })
+    const { id, lname, fname, mname, college, program, year, password } = user
     const [confPass, setConfPass] = useState("");
 
-    //SET ID AND PASSWORD TO LOCAL STORAGE
-    useEffect(() => {
-        localStorage.setItem('id', JSON.stringify(id))
-    }, [id]);
-
-    useEffect(() => {
-        localStorage.setItem('password', JSON.stringify(password))
-    }, [password]);
+    //Check if user exist in userDB
+    const userExist = id => JSON.parse(localStorage.getItem('userDB')).find(db => db.id === id) ? true : false
 
     //Success Modal
     const [showSuccess, setShowSuccess] = useState(false);
 
-    //Error Modal
+    //Password Not Match Modal
     const [showError, setShowError] = useState(false);
 
-    const handleClose = () => {
-        setShowSuccess(false);
-        setShowError(false);
-    };
+    //User Exist Modal
+    const [showUserExist, setShowUserExist] = useState(false);
+
+    const onChange = e => {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value
+        })
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
+        //Check if password and confirm password matches
         if (password === confPass) {
-            console.log("Password and Confirm Password match!")
-            setShowSuccess(true);
+            // Check if User is Existing
+            if (userExist(id)) {
+                setShowUserExist(true);
+                return
+            } else {
+                // Save Data
+                let userDB = JSON.parse(localStorage.getItem('userDB'))
+                userDB.push(user)
+                localStorage.setItem('userDB', JSON.stringify(userDB))
+
+                console.log("Password and Confirm Password match! Data is saved.")
+                setShowSuccess(true);
+            }
+
         } else {
             console.log("Password and Confirm Password does not match!")
             setShowError(true);
-            setPassword("");
-            setConfPass("");
         }
 
-        /* For Console */
-        console.log('You clicked submit.')
+        // For Console 
+        console.log('You clicked Submit.')
         const input = {
             id: id,
             lname: lname,
@@ -79,23 +85,27 @@ const Registration = () => {
         else e.target.setCustomValidity(message)
     }
 
-    // clearing the values
+    // Clearing the values
     const clearFields = () => {
-        setId("");
-        setLname("");
-        setFname("");
-        setMname("");
-        setCollege("");
-        setProgram(0);
-        setYear("");
-        setPassword("");
+        setUser({
+            id: "",
+            lname: "",
+            fname: "",
+            mname: "",
+            college: "",
+            program: "",
+            year: "",
+            password: ""
+        })
         setConfPass("");
     }
 
-    const handleOkay = () => {
-        clearFields()
-        handleClose()
-    }
+    const handleClose = () => {
+        setShowSuccess(false);
+        setShowError(false);
+        setShowUserExist(false);
+    };
+
 
     return (
         <>
@@ -125,9 +135,10 @@ const Registration = () => {
                                                                     type="text"
                                                                     className="form-control form-control-lg"
                                                                     value={id}
+                                                                    name="id"
                                                                     pattern="[0-9]{10}"
                                                                     maxLength={10}
-                                                                    onChange={(e) => setId(e.target.value)}
+                                                                    onChange={onChange}
                                                                     title="Student ID must be a 10 digit number"
                                                                     onInvalid={e => validate(e, 'Student ID must be a 10 digit number')}
                                                                     onInput={e => validate(e, '')}
@@ -142,7 +153,8 @@ const Registration = () => {
                                                                 <input type="text"
                                                                     className="form-control form-control-lg"
                                                                     value={lname}
-                                                                    onChange={(e) => setLname(e.target.value)}
+                                                                    name="lname"
+                                                                    onChange={onChange}
                                                                     required
                                                                     autoComplete="off"
                                                                 />
@@ -157,7 +169,8 @@ const Registration = () => {
                                                                 <input type="text"
                                                                     className="form-control form-control-lg"
                                                                     value={fname}
-                                                                    onChange={(e) => setFname(e.target.value)}
+                                                                    name="fname"
+                                                                    onChange={onChange}
                                                                     required
                                                                     autoComplete="off"
                                                                 />
@@ -169,7 +182,8 @@ const Registration = () => {
                                                                 <input type="text"
                                                                     className="form-control form-control-lg"
                                                                     value={mname}
-                                                                    onChange={(e) => setMname(e.target.value)}
+                                                                    name="mname"
+                                                                    onChange={onChange}
                                                                     required
                                                                     autoComplete="off"
                                                                 />
@@ -182,7 +196,8 @@ const Registration = () => {
                                                         <input type="text"
                                                             className="form-control form-control-lg"
                                                             value={college}
-                                                            onChange={(e) => setCollege(e.target.value)}
+                                                            name="college"
+                                                            onChange={onChange}
                                                             required
                                                             autoComplete="off"
                                                         />
@@ -194,15 +209,16 @@ const Registration = () => {
                                                             <label className="form-label" htmlFor="form3Example8">Program Enrolled</label>
                                                             <select className="form-select form-select-sm" aria-label=".form-select-sm example"
                                                                 value={program}
-                                                                onChange={(e) => setProgram(e.target.value)}
+                                                                name="program"
+                                                                onChange={onChange}
                                                                 required
                                                                 autoComplete="off"
                                                             >
                                                                 <option value="">Select Program</option>
-                                                                <option value="1">Gryffindor</option>
-                                                                <option value="2">Slytherin</option>
-                                                                <option value="3">Ravenclaw</option>
-                                                                <option value="3">Hufflepuff</option>
+                                                                <option value="Gryffindor">Gryffindor</option>
+                                                                <option value="Slytherin">Slytherin</option>
+                                                                <option value="Ravenclaw">Ravenclaw</option>
+                                                                <option value="Hufflepuff">Hufflepuff</option>
                                                             </select>
                                                         </div>
 
@@ -210,16 +226,17 @@ const Registration = () => {
                                                             <label className="form-label" htmlFor="form3Example8">Year Level</label>
                                                             <select className="form-select form-select-sm" aria-label=".form-select-sm example"
                                                                 value={year}
-                                                                onChange={(e) => setYear(e.target.value)}
+                                                                name="year"
+                                                                onChange={onChange}
                                                                 required
                                                                 autoComplete="off"
                                                             >
                                                                 <option value="">Select Year</option>
-                                                                <option value="1">First Year</option>
-                                                                <option value="2">Second Year</option>
-                                                                <option value="3">Third Year</option>
-                                                                <option value="4">Fourth Year</option>
-                                                                <option value="5">Fifth Year</option>
+                                                                <option value="First Year">First Year</option>
+                                                                <option value="Second Year">Second Year</option>
+                                                                <option value="Third Year">Third Year</option>
+                                                                <option value="Fourth Year">Fourth Year</option>
+                                                                <option value="Fifth Year">Fifth Year</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -229,9 +246,10 @@ const Registration = () => {
                                                             type="password"
                                                             className="form-control form-control-lg"
                                                             value={password}
+                                                            name="password"
                                                             pattern="^(?=.{8,}$)(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$"
                                                             minLength={8}
-                                                            onChange={(e) => setPassword(e.target.value)}
+                                                            onChange={onChange}
                                                             title="Password must be at least 8 characters with at least 1 special character, 1 uppercase letter, and 1 number"
                                                             onInvalid={e => validate(e, 'Password must be at least 8 characters  with at least 1 special character, 1 uppercase letter, and 1 number')}
                                                             onInput={e => validate(e, '')}
@@ -245,6 +263,7 @@ const Registration = () => {
                                                         <input type="password"
                                                             className="form-control form-control-lg"
                                                             value={confPass}
+                                                            name="confPass"
                                                             onChange={(e) => setConfPass(e.target.value)}
                                                             required
                                                             autoComplete="off"
@@ -259,8 +278,12 @@ const Registration = () => {
 
                                                         <button type="submit" className="btn btn-warning btn-lg ms-2">Submit</button>
                                                     </div>
-                                                    <div className="text-center">
+                                                    <div className="text-center pt-2">
                                                         <p>Already registered? <Link to="/login" aria-current="page" id="Login-link">Login</Link></p>
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <p className="homepage-link">Go back to <Link to="/" aria-current="page" id="Homepage-link">Homepage</Link>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -293,6 +316,18 @@ const Registration = () => {
                         <Modal.Footer>
                             <Button variant="primary" onClick={handleClose}>
                                 Change
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                    {/* Modal for Account Existing*/}
+                    <Modal show={showUserExist} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title className="reg-success">Message</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>The user account already exists</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="primary" onClick={handleClose}>
+                                Close
                             </Button>
                         </Modal.Footer>
                     </Modal>

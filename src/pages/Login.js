@@ -7,33 +7,57 @@ import '../styles/Login.scss';
 import { Modal, Button } from "react-bootstrap";
 
 const Login = () => {
-    //GET ID AND PASSWORD FROM LOCAL STORAGE
-    const [id, setId] = useState("", [], () => {
-        const localData = localStorage.getItem('id');
-        return localData ? JSON.parse(localData) : [];
-    });
-    const [password, setPassword] = useState("", [], () => {
-        const localData = localStorage.getItem('password');
-        return localData ? JSON.parse(localData) : [];
-    });
-    const [show, setShow] = useState(false);
+    const [id, setId] = useState("")
+    const [password, setPassword] = useState("");
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [showNoUser, setShowNoUser] = useState(false);
+    const [showInvPass, setShowInvPass] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const userDB = JSON.parse(localStorage.getItem('userDB'))
+
+    //Check if user exist in userDB
+    const userExist = id => JSON.parse(localStorage.getItem('userDB')).find(db => db.id === id) ? true : false
+
+    //Check if password match in userDB
+    const checkPassword = password => userDB.find(db => db.id === id).password === password ? true : false
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        setShow(true)
+        console.log('You clicked Login.')
+
+        //Check if user is existing
+        if (!userExist(id)) {
+            console.log("User does not exist.")
+            setShowNoUser(true);
+            return
+        }
+        //Check if Credentials Match
+        if (checkPassword(password)) {
+            console.log("Login Success!")
+            setShowSuccess(true);
+            return
+        } else {
+            console.log("Invalid Credentials.")
+            setShowInvPass(true);
+        }
+
     };
 
-    // clearing the values
+    // Clearing the values
     const clearFields = () => {
         setId("");
         setPassword("");
     }
-
     const handleOkay = () => {
         clearFields()
         handleClose()
     }
+
+    const handleClose = () => {
+        setShowSuccess(false);
+        setShowNoUser(false);
+        setShowInvPass(false);
+    };
 
     return (
         <>
@@ -91,13 +115,17 @@ const Login = () => {
                                                             <button type="button" className="btn btn-secondary btn-lg" onClick={clearFields} id="Cancel">
                                                                 Cancel
                                                             </button>
-                                                            
+
                                                             <button type="submit" className="btn btn-warning btn-lg mx-2" id="Login-btn">
                                                                 Login
                                                             </button>
                                                         </div>
+                                                        <div className="text-center pt-2">
+                                                            <p>Not a member? <Link to="/registration-form" aria-current="page" id="Register-Link">Register</Link>
+                                                            </p>
+                                                        </div>
                                                         <div className="text-center">
-                                                            <p>Not a member? <Link to="/registration-form" aria-current="page" id="Register-link">Register</Link>
+                                                            <p className="homepage-link">Go back to <Link to="/" aria-current="page" id="Homepage-link">Homepage</Link>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -108,11 +136,38 @@ const Login = () => {
                                 </div>
                             </div>
                         </div>
-                        <Modal show={show} onHide={handleClose}>
+                        {/* Login Success Modal*/}
+                        <Modal show={showSuccess} onHide={handleClose}>
                             <Modal.Header closeButton>
                                 <Modal.Title className="login-success">Login Success</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>Welcome to Platform 9 3/4!</Modal.Body>
+                            <Modal.Footer>
+                                <Link to="/" aria-current="page" id="Register-link">
+                                    <Button variant="primary">
+                                        Okay
+                                    </Button>
+                                </Link>
+                            </Modal.Footer>
+                        </Modal>
+                        {/* Error Modal for User Not Found */}
+                        <Modal show={showNoUser} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title className="reg-success">Message</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>User does not exist.</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="primary" onClick={handleOkay}>
+                                    Okay
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+                        {/* Error Modal for User Not Found */}
+                        <Modal show={showInvPass} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title className="reg-success">Message</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Invalid Credentials</Modal.Body>
                             <Modal.Footer>
                                 <Button variant="primary" onClick={handleOkay}>
                                     Okay

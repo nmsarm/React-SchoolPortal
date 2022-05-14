@@ -57,10 +57,11 @@
   transform: translateY(0);
 }
 
-#Register-link {
-    color: black;
+#Register-Link {
     font-style: italic;
 }
 
-
+.homepage-link, #Homepage-link {
+  font-size: 14px;
+}  
 
