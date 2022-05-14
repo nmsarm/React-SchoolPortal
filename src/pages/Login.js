@@ -7,8 +7,15 @@ import '../styles/Login.scss';
 import { Modal, Button } from "react-bootstrap";
 
 const Login = () => {
-    const [id, setId] = useState("");
-    const [password, setPassword] = useState("");
+    //GET ID AND PASSWORD FROM LOCAL STORAGE
+    const [id, setId] = useState("", [], () => {
+        const localData = localStorage.getItem('id');
+        return localData ? JSON.parse(localData) : [];
+    });
+    const [password, setPassword] = useState("", [], () => {
+        const localData = localStorage.getItem('password');
+        return localData ? JSON.parse(localData) : [];
+    });
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
