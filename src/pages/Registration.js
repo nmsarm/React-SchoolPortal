@@ -1,22 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Students2 from '../styles/pics/students1.jpg';
 import '../styles/Registration.scss';
-/* import useLocalStorage from './useLocalStorage'; */
 
 // For Modal
 import { Modal, Button } from "react-bootstrap";
 
+//GET ID FROM LOCAL STORAGE
 const Registration = () => {
-    const [id, setId] = useState("");
+    const [id, setId] = useState("", [], () => {
+        const localData = localStorage.getItem('id');
+        return localData ? JSON.parse(localData) : [];
+    });
     const [lname, setLname] = useState("");
     const [fname, setFname] = useState("");
     const [mname, setMname] = useState("");
     const [college, setCollege] = useState("");
     const [program, setProgram] = useState(0);
     const [year, setYear] = useState(" ");
-    const [password, setPassword] = useState("");
+    //GET PASSWORD FROM LOCAL STORAGE
+    const [password, setPassword] = useState("", [], () => {
+        const localData = localStorage.getItem('password');
+        return localData ? JSON.parse(localData) : [];
+    });
     const [confPass, setConfPass] = useState("");
+
+    //SET ID AND PASSWORD TO LOCAL STORAGE
+    useEffect(() => {
+        localStorage.setItem('id', JSON.stringify(id))
+    }, [id]);
+
+    useEffect(() => {
+        localStorage.setItem('password', JSON.stringify(password))
+    }, [password]);
 
     //Success Modal
     const [showSuccess, setShowSuccess] = useState(false);
@@ -81,8 +97,6 @@ const Registration = () => {
         handleClose()
     }
 
-    /* let [studId, setValue] = useLocalStorage('studentID', ''); */
-
     return (
         <>
             <main className="registration-page">
@@ -111,11 +125,9 @@ const Registration = () => {
                                                                     type="text"
                                                                     className="form-control form-control-lg"
                                                                     value={id}
-                                                                    /* value={studID} */
                                                                     pattern="[0-9]{10}"
                                                                     maxLength={10}
                                                                     onChange={(e) => setId(e.target.value)}
-                                                                    /* onChange={(e) => setValue(e.target.value)} */
                                                                     title="Student ID must be a 10 digit number"
                                                                     onInvalid={e => validate(e, 'Student ID must be a 10 digit number')}
                                                                     onInput={e => validate(e, '')}
