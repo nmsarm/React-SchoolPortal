@@ -279,10 +279,10 @@ const Registration = () => {
                                                         <button type="submit" className="btn btn-warning btn-lg ms-2">Submit</button>
                                                     </div>
                                                     <div className="text-center pt-2">
-                                                        <p>Already registered? <Link to="/login" aria-current="page" id="Login-link">Login</Link></p>
+                                                        <p>Already registered? <Link to="/login" aria-current="page" id="Login-Link">Login</Link></p>
                                                     </div>
                                                     <div className="text-center">
-                                                        <p className="homepage-link">Go back to <Link to="/" aria-current="page" id="Homepage-link">Homepage</Link>
+                                                        <p className="homepage-link">Go back to <Link to="/" aria-current="page" id="Homepage-Link">Homepage</Link>
                                                         </p>
                                                     </div>
                                                 </div>
